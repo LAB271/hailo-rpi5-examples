@@ -1,0 +1,50 @@
+ 
+    1  sudo apt-get install raspberrypi-kernel-headers
+    2  sudo apt install hailo-all
+    3  sudo reboot
+    4  hailortcli fw-control identify
+    5  rpicam-hello -t 10s
+    6  sudo apt update && sudo apt install rpicam-apps
+    7  history
+    8  git clone https://github.com/hailo-ai/hailo-rpi5-examples.git
+    9  cd hailo-rpi5-examples
+   10  ./install.sh
+   13  history
+   14  sudo apt install v4l2loopback-dkms
+   15  sudo modprobe v4l2loopback video_nr=1 card_label="RTSPCam" exclusive_caps=1
+   16  sudo apt update
+   17  sudo apt install ffmpeg v4l2loopback-dkms
+   18  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf scale=640:480 /dev/video1
+   19  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf scale=:1080 /dev/video1
+   20  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf scale=1920:1080 /dev/video1
+   21  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf scale=640:480 /dev/video1
+   22  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf scale=1280:960 /dev/video1
+   23  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf scale=1:1 /dev/video1
+   24  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf /dev/video1
+   25  ffmpeg -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101"
+   26  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:..." -f v4l2 -pix_fmt yuv420p /dev/video1
+   27  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -vf scale=1280:720 -f v4l2 -pix_fmt yuv420p /dev/video1
+   28  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -vf scale=1280:720,format=yuv420p -f v4l2 /dev/video1
+   29  fuser /dev/video1
+   30  sudo fuser -k /dev/video1
+   31  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -vf scale=1280:720,format=yuv420p -f v4l2 /dev/video1
+   32  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf scale=640:480 /dev/video1
+   33  ffmpeg -rtsp_transport tcp -i "rtsp://PPE:7Vs4DzkxjbGyNe7@10.32.8.50/Streaming/channels/101" -f v4l2 -pix_fmt yuv420p -vf "scale=640:480,hflip" /dev/video1
+   34  history
+   35  sudo nano /usr/local/bin/rtsp-to-v4l2.sh
+   36  sudo chmod +x /usr/local/bin/rtsp-to-v4l2.sh
+   37  sudo nano /etc/systemd/system/rtsp-to-v4l2.service
+   38  sudo systemctl daemon-reexec
+   39  sudo systemctl daemon-reload
+   40  sudo systemctl enable rtsp-to-v4l2.service
+   41  sudo systemctl start rtsp-to-v4l2.service
+   42  sudo systemctl status rtsp-to-v4l2.service
+   43  sudo reboot
+   44  cd hailo-rpi5-examples/
+   45  source setup_env.sh 
+   46  python basic_pipelines/detection_simple.py 
+   47  python basic_pipelines/detection.py --help
+   48  python basic_pipelines/pose_estimation.py 
+   49  python basic_pipelines/detection_simple.py 
+   50  python basic_pipelines/detection_simple.py --input /dev/video1
+   51  history
