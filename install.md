@@ -177,7 +177,7 @@ source setup_env.sh
 
 # Start wmctrl in parallel na 2 seconden
 (
-  sleep 2
+  sleep 10
   wmctrl -r "Detection" -b add,maximized_vert,maximized_horz
 ) &
 
